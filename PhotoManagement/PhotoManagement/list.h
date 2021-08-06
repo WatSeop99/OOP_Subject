@@ -49,11 +49,11 @@ public:
 	~List();
 	bool IsFull() const;
 	bool IsEmpty() const;
-	int GetLength() const;
-	void MakeEmpty();
+	int GetLength() const { return m_Length; }
+	void MakeEmpty() { m_Length = 0; }
 	bool PutItem(T item);
 	bool DeleteItem(T item);
-	void ResetList();
+	void ResetList() { curIndx = -1; }
 	bool GetNextItem(T& item);
 	T* GetNextItemPtr();
 	int Retrieve(T& item);
@@ -89,16 +89,6 @@ bool List<T>::IsEmpty() const {
 		return true;
 	else
 		return false;
-}
-
-template <class T>
-int List<T>::GetLength() const {
-	return m_Length;
-}
-
-template <class T>
-void List<T>::MakeEmpty() {
-	m_Length = 0;
 }
 
 template <class T>
@@ -152,11 +142,6 @@ bool List<T>::DeleteItem(T item) {
 		cout << e.what() << endl;
 		return false;
 	}
-}
-
-template <class T>
-void List<T>::ResetList() {
-	curIndx = -1;
 }
 
 template <class T>
