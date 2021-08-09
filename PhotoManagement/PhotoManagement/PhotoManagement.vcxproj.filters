@@ -21,15 +21,21 @@
     <ClCompile Include="PhtoType.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base.h">
+    <ClInclude Include="Base.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="list.h">
+    <ClInclude Include="List.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PhotoType.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

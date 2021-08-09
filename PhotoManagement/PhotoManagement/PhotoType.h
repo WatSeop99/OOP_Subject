@@ -9,7 +9,7 @@ private:
 	std::string eventName;
 	std::string contents;
 public:
-	PhotoType(std::string pName, std::string pEvent, std::string pContents);
+	PhotoType(std::string pName = "\0", std::string pEvent = "\0", std::string pContents = "\0");
 	~PhotoType() { }
 	std::string GetPhotoName() { return photoName; }
 	std::string GetEventName() { return eventName; }
