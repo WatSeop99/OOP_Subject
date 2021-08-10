@@ -11,3 +11,7 @@
 '21.8.5  list.h 파일 생성
 
 '21.8.6  PhotoType.h, .cpp 파일 생성
+
+'21.8.9  Event.h, .cpp 파일 생성
+
+'21.8.10  Application.h, .cpp 파일 생성. main파일 
