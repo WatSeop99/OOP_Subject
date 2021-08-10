@@ -1,6 +1,8 @@
-﻿#include <iostream>
+﻿#include "Application.h"
 
-int main(void)
-{
-    std::cout << "Hello World!\n";
+int main() {
+	Application photoManager;
+	photoManager.Run();
+
+	return 0;
 }

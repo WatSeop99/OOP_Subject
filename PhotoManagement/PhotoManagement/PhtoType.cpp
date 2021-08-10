@@ -5,6 +5,7 @@ PhotoType::PhotoType(std::string pName = "\0", std::string pEvent = "\0", std::s
 
 bool PhotoType::ReadItemFromKB() {
 	using namespace std;
+
 	char temp[256];
 	cout << "\t Photo Name  -->"; cin >> photoName;
 	cout << "\t Event Name  -->"; cin >> eventName;
@@ -27,14 +28,20 @@ bool PhotoType::ReadRecordFromFile(std::ifstream& inFile) {
 	inFile >> photoName >> eventName;
 	inFile.getline(temp, 255);
 	contents.assign(temp);
+
 	if (inFile.fail())
 		return false;
 	inFile.clear();
 	return true;
 }
 
+void PhotoType::WriteRecordToFile(std::ofstream& outFile) {
+	outFile << photoName << " " << eventName << " " << contents << std::endl;
+}
+
 void PhotoType::DisplayOnScreen() {
 	using namespace std;
+
 	cout << "  " << setw(14) << photoName << setw(14) << eventName << setw(14) << contents << endl;
 }
 

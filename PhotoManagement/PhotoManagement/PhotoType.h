@@ -15,6 +15,7 @@ public:
 	std::string GetEventName() { return eventName; }
 	bool ReadItemFromKB();
 	bool ReadRecordFromFile(std::ifstream& inFile);
+	void WriteRecordToFile(std::ofstream& outFile);
 	void SetPhotoName(std::string name) { photoName = name; }
 	void SetEventName(std::string name) { eventName = name; }
 	void DisplayOnScreen();
