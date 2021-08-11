@@ -1,13 +1,13 @@
 #include "Event.h"
 
-bool EventType::operator==(EventType item) {
+bool EventType::operator==(const EventType& item) {
 	if (name == item.name)
 		return true;
 	else
 		return false;
 }
 
-void EventType::operator=(EventType item) {
+void EventType::operator=(EventType& item) {
 	name = item.name;
 	std::string* strPtr;
 	item.nameList.ResetList();
@@ -15,14 +15,14 @@ void EventType::operator=(EventType item) {
 		nameList.PutItem(*strPtr);
 }
 
-bool EventType::operator<(EventType item) {
+bool EventType::operator<(const EventType& item) {
 	if (name < item.name)
 		return true;
 	else
 		return false;
 }
 
-bool EventType::operator>(EventType item) {
+bool EventType::operator>(const EventType& item) {
 	if (name > item.name)
 		return true;
 	else
@@ -50,8 +50,7 @@ void EventType::DisplayDetails() {
 }
 
 PhotoType* EventType::FindByNameKey(std::string key) {
-	PhotoType ptemp;
-	ptemp.SetPhotoName(key);
+	PhotoType ptemp(key);
 	return master.RetrievePtr(ptemp);
 }
 
@@ -60,8 +59,7 @@ PhotoType* EventType::FindByContentsKey(std::string key) {
 	std::string* strPtr;
 	nameList.ResetList();
 	while (strPtr = nameList.GetNextItemPtr()) {
-		PhotoType ptemp;
-		ptemp.SetPhotoName(*strPtr);
+		PhotoType ptemp(*strPtr);
 		ptempPtr = master.RetrievePtr(ptemp);
 		if (ptempPtr) {
 			if (ptempPtr->FindKeyFromContents(key))

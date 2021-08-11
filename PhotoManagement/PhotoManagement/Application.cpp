@@ -1,3 +1,4 @@
+#include <iomanip>
 #include "Application.h"
 
 List<PhotoType> Base::master;
@@ -181,7 +182,7 @@ bool Application::WriteAllToFile() {
 	return true;
 }
 
-bool Application::AddPhotoToList(PhotoType item) {
+bool Application::AddPhotoToList(PhotoType& item) {
 	if (!master.GetLength())
 		master.PutItem(item);
 	else {
@@ -194,7 +195,7 @@ bool Application::AddPhotoToList(PhotoType item) {
 
 	if (!eventList.GetLength()) {
 		EventType record(item.GetEventName());
-		record.AddPhotoKey(item.GetEventName());
+		record.AddPhotoKey(item.GetPhotoName());
 		eventList.PutItem(record);
 	}
 	else {
@@ -217,7 +218,7 @@ void Application::DisplayListUsingEL() {
 
 	EventType record(name), *ptr;
 	ptr = eventList.RetrievePtr(record);
-	if (!ptr)
+	if (ptr)
 		ptr->DisplayDetails();
 	else
 		std::cout << "\n%%%% 일치하는 사진을 찾지 못했습니다 %%%%\n";
@@ -231,9 +232,9 @@ void Application::SearchByPhotoNameNEvent() {
 	EventType record(eName), *ePtr;
 	PhotoType* pPtr;
 	ePtr = eventList.RetrievePtr(record);
-	if (!ePtr) {
+	if (ePtr) {
 		pPtr = ePtr->FindByNameKey(pName);
-		if (!pPtr)
+		if (pPtr)
 			pPtr->DisplayOnScreen();
 		else
 			std::cout << "\n%%%% 일치하는 사진을 찾지 못했습니다 %%%%\n";
@@ -250,9 +251,9 @@ void Application::SearchByEventNContents() {
 	EventType record(eName), *ePtr;
 	PhotoType* pPtr;
 	ePtr = eventList.RetrievePtr(record);
-	if (!ePtr) {
+	if (ePtr) {
 		pPtr = ePtr->FindByContentsKey(contents);
-		if (!pPtr)
+		if (pPtr)
 			pPtr->DisplayOnScreen();
 		else
 			std::cout << "\n%%%% 일치하는 사진을 찾지 못했습니다 %%%%\n";

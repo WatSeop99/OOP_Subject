@@ -20,7 +20,7 @@ public:
 	int GetCommand();
 	bool ReadAllFromFile();
 	bool WriteAllToFile();
-	bool AddPhotoToList(PhotoType item);
+	bool AddPhotoToList(PhotoType& item);
 	void DisplayListUsingEL();
 	void SearchByPhotoNameNEvent();
 	void SearchByEventNContents();

@@ -7,12 +7,12 @@ private:
 	std::string name;
 	List<std::string> nameList;
 public:
-	EventType(std::string eName) : name(eName) { }
+	EventType(std::string eName = "\0") : name(eName) { }
 	~EventType() { }
-	bool operator==(EventType item);
-	void operator=(EventType item);
-	bool operator<(EventType item);
-	bool operator>(EventType item);
+	bool operator==(const EventType& item);
+	void operator=(EventType& item);
+	bool operator<(const EventType& item);
+	bool operator>(const EventType& item);
 	void SetEventName(std::string str) { name = str; }
 	std::string GetEventName() { return name; }
 	void AddPhotoKey(std::string key);

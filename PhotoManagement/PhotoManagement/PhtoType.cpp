@@ -1,7 +1,5 @@
+#include <iomanip>
 #include "PhotoType.h"
-
-PhotoType::PhotoType(std::string pName = "\0", std::string pEvent = "\0", std::string pContens = "\0") : photoName(pName), eventName(pEvent), contents(pContens)
-{ }
 
 bool PhotoType::ReadItemFromKB() {
 	using namespace std;
@@ -52,27 +50,27 @@ bool PhotoType::IsEventEqual(std::string name) {
 		return false;
 }
 
-bool PhotoType::operator==(PhotoType item) {
+bool PhotoType::operator==(const PhotoType& item) {
 	if (photoName == item.photoName)
 		return true;
 	else
 		return false;
 }
 
-void PhotoType::operator=(PhotoType item) {
+void PhotoType::operator=(PhotoType& item) {
 	photoName = item.photoName;
 	eventName = item.eventName;
 	contents = item.contents;
 }
 
-bool PhotoType::operator<(PhotoType item) {
+bool PhotoType::operator<(const PhotoType& item) {
 	if (photoName < item.photoName)
 		return true;
 	else
 		return false;
 }
 
-bool PhotoType::operator>(PhotoType item) {
+bool PhotoType::operator>(const PhotoType& item) {
 	if (photoName > item.photoName)
 		return true;
 	else

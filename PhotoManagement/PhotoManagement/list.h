@@ -51,14 +51,13 @@ public:
 	bool IsEmpty() const;
 	int GetLength() const { return m_Length; }
 	void MakeEmpty() { m_Length = 0; }
-	bool PutItem(T item);
-	bool DeleteItem(T item);
+	bool PutItem(T& item);
+	bool DeleteItem(T& item);
 	void ResetList() { curIndx = -1; }
 	bool GetNextItem(T& item);
 	T* GetNextItemPtr();
 	int Retrieve(T& item);
 	T* RetrievePtr(T& itme);
-
 };
 
 template <class T>
@@ -66,6 +65,7 @@ List<T>::List(int size) {
 	m_Length = 0;
 	maxSize = size;
 	m_Array = new T[maxSize];
+	curIndx = -1;
 }
 
 template <class T>
@@ -92,7 +92,7 @@ bool List<T>::IsEmpty() const {
 }
 
 template <class T>
-bool List<T>::PutItem(T item) {
+bool List<T>::PutItem(T& item) {
 	if (IsFull()) {
 		FullList e;
 		throw e;
@@ -116,13 +116,13 @@ bool List<T>::PutItem(T item) {
 		}
 	}
 	catch (std::exception& e) {
-		std::cout << e.what() << endl;
+		std::cout << e.what() << std::endl;
 		return false;
 	}
 }
 
 template <class T>
-bool List<T>::DeleteItem(T item) {
+bool List<T>::DeleteItem(T& item) {
 	if (IsEmpty()) {
 		EmptyList e;
 		throw e;
@@ -139,7 +139,7 @@ bool List<T>::DeleteItem(T item) {
 		return true;
 	}
 	catch (std::exception& e) {
-		cout << e.what() << endl;
+		std::cout << e.what() << std::endl;
 		return false;
 	}
 }

@@ -9,7 +9,7 @@ private:
 	std::string eventName;
 	std::string contents;
 public:
-	PhotoType(std::string pName = "\0", std::string pEvent = "\0", std::string pContents = "\0");
+	PhotoType(std::string pName = "\0", std::string pEvent = "\0", std::string pContens = "\0") : photoName(pName), eventName(pEvent), contents(pContens) { }
 	~PhotoType() { }
 	std::string GetPhotoName() { return photoName; }
 	std::string GetEventName() { return eventName; }
@@ -20,9 +20,9 @@ public:
 	void SetEventName(std::string name) { eventName = name; }
 	void DisplayOnScreen();
 	bool IsEventEqual(std::string name);
-	bool operator==(PhotoType item);
-	void operator=(PhotoType item);
-	bool operator<(PhotoType item);
-	bool operator>(PhotoType item);
+	bool operator==(const PhotoType& item);
+	void operator=(PhotoType& item);
+	bool operator<(const PhotoType& item);
+	bool operator>(const PhotoType& item);
 	bool FindKeyFromContents(std::string key);
 };
