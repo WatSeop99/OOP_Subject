@@ -14,4 +14,6 @@
 
 '21.8.9  Event.h, .cpp 파일 생성
 
-'21.8.10  Application.h, .cpp 파일 생성. main파일 
+'21.8.10  Application.h, .cpp 파일 생성. main파일 생성. 
+
+'21.8.11  프로그램 실행을 위한 c++ 문법문제 해결. 리스트에 파일 추가에러 해결.
