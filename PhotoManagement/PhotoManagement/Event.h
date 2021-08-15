@@ -9,10 +9,10 @@ private:
 public:
 	EventType(std::string eName = "\0") : name(eName) { }
 	~EventType() { }
-	bool operator==(const EventType& item);
+	bool operator==(const EventType& item) { return name == item.name ? true : false; }
 	void operator=(EventType& item);
-	bool operator<(const EventType& item);
-	bool operator>(const EventType& item);
+	bool operator<(const EventType& item) { return name < item.name ? true : false; }
+	bool operator>(const EventType& item) { return name > item.name ? true : false; }
 	void SetEventName(std::string str) { name = str; }
 	std::string GetEventName() { return name; }
 	void AddPhotoKey(std::string key);

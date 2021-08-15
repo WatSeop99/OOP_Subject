@@ -43,43 +43,8 @@ void PhotoType::DisplayOnScreen() {
 	cout << "  " << setw(14) << photoName << setw(14) << eventName << setw(14) << contents << endl;
 }
 
-bool PhotoType::IsEventEqual(std::string name) {
-	if (eventName == name)
-		return true;
-	else
-		return false;
-}
-
-bool PhotoType::operator==(const PhotoType& item) {
-	if (photoName == item.photoName)
-		return true;
-	else
-		return false;
-}
-
 void PhotoType::operator=(PhotoType& item) {
 	photoName = item.photoName;
 	eventName = item.eventName;
 	contents = item.contents;
-}
-
-bool PhotoType::operator<(const PhotoType& item) {
-	if (photoName < item.photoName)
-		return true;
-	else
-		return false;
-}
-
-bool PhotoType::operator>(const PhotoType& item) {
-	if (photoName > item.photoName)
-		return true;
-	else
-		return false;
-}
-
-bool PhotoType::FindKeyFromContents(std::string key) {
-	if (contents.find(key) != std::string::npos)
-		return true;
-	else
-		return false;
 }

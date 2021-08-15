@@ -47,8 +47,8 @@ private:
 public:
 	List(int size = MAXSIZE);
 	~List();
-	bool IsFull() const;
-	bool IsEmpty() const;
+	bool IsFull() const { return m_Length >= maxSize-1 ? true : false; }
+	bool IsEmpty() const { return m_Length == 0 ? true : false; }
 	int GetLength() const { return m_Length; }
 	void MakeEmpty() { m_Length = 0; }
 	bool PutItem(T& item);
@@ -73,22 +73,6 @@ List<T>::~List() {
 	MakeEmpty();
 	if (maxSize > 0)
 		delete[] m_Array;
-}
-
-template <class T>
-bool List<T>::IsFull() const {
-	if (m_Length >= maxSize-1)
-		return true;
-	else
-		return false;
-}
-
-template <class T>
-bool List<T>::IsEmpty() const {
-	if (m_Length == 0)
-		return true;
-	else
-		return false;
 }
 
 template <class T>

@@ -1,32 +1,11 @@
 #include "Event.h"
 
-bool EventType::operator==(const EventType& item) {
-	if (name == item.name)
-		return true;
-	else
-		return false;
-}
-
 void EventType::operator=(EventType& item) {
 	name = item.name;
 	std::string* strPtr;
 	item.nameList.ResetList();
 	while (strPtr = item.nameList.GetNextItemPtr())
 		nameList.PutItem(*strPtr);
-}
-
-bool EventType::operator<(const EventType& item) {
-	if (name < item.name)
-		return true;
-	else
-		return false;
-}
-
-bool EventType::operator>(const EventType& item) {
-	if (name > item.name)
-		return true;
-	else
-		return false;
 }
 
 void EventType::AddPhotoKey(std::string key) {

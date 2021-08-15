@@ -19,10 +19,10 @@ public:
 	void SetPhotoName(std::string name) { photoName = name; }
 	void SetEventName(std::string name) { eventName = name; }
 	void DisplayOnScreen();
-	bool IsEventEqual(std::string name);
-	bool operator==(const PhotoType& item);
+	bool IsEventEqual(std::string name) { return eventName == name ? true : false; }
+	bool operator==(const PhotoType& item) { return photoName == item.photoName ? true : false; }
 	void operator=(PhotoType& item);
-	bool operator<(const PhotoType& item);
-	bool operator>(const PhotoType& item);
-	bool FindKeyFromContents(std::string key);
+	bool operator<(const PhotoType& item) { return photoName < item.photoName ? true : false; }
+	bool operator>(const PhotoType& item) { return photoName > item.photoName ? true : false; }
+	bool FindKeyFromContents(std::string key) { return contents.find(key) != std::string::npos ? true : false; }
 };
