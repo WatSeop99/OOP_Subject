@@ -1,8 +1,9 @@
 #include <iomanip>
 #include "Application.h"
 
-List<PhotoType> Base::master;
+List<PhotoType> Base::master; // static 변수 초기화
 
+// 사진 관리 실행 메뉴
 void Application::Run() {
 	using namespace std;
 
@@ -13,34 +14,34 @@ void Application::Run() {
 		case 0:
 			return;
 		case 1:
-			AddPhoto();
+			AddPhoto(); // 사진 추가
 			break;
 		case 2:
-			DeletePhoto();
+			DeletePhoto(); // 사진 삭제
 			break;
 		case 3:
-			FindPhoto();
+			FindPhoto(); // 사진 검색
 			break;
 		case 4:
-			FindPhotoByEvent();
+			FindPhotoByEvent(); // 이벤트로 사진 검색
 			break;
 		case 5:
-			DisplayList();
+			DisplayList(); // 사진 목록 출력
 			break;
 		case 6:
-			ReadAllFromFile();
+			ReadAllFromFile(); // 외부파일로부터 데이터 읽기
 			break;
 		case 7:
-			WriteAllToFile();
+			WriteAllToFile(); // 외부파일에 데이터 쓰기
 			break;
 		case 8:
-			DisplayListUsingEL();
+			DisplayListUsingEL(); // 이벤트 리스트를 이용하여 사진목록 출력
 			break;
 		case 9:
-			SearchByPhotoNameNEvent();
+			SearchByPhotoNameNEvent(); // 사진 이름과 이벤트로 검색
 			break;
 		case 10:
-			SearchByEventNContents();
+			SearchByEventNContents(); // 사진 이벤트와 내용으로 검색
 			break;
 		default:
 			cout << "Invalid operation \n";
@@ -48,13 +49,15 @@ void Application::Run() {
 	}
 }
 
+// 사진 추가
 void Application::AddPhoto() {
 	PhotoType input;
-	if (!input.ReadItemFromKB())
+	if (!input.ReadItemFromKB()) // 사진 정보 입력
 		return;
 	AddPhotoToList(input);
 }
 
+// 사진 삭제
 void Application::DeletePhoto() {
 	std::string name;
 	std::cout << "\t 삭제할 사진명 입력 -->";
@@ -64,6 +67,7 @@ void Application::DeletePhoto() {
 	master.DeleteItem(record);
 }
 
+// 사진 검색
 void Application::FindPhoto() {
 	std::string name;
 	std::cout << "\t 찾고자 하는 사진명 입력 --> ";
@@ -77,6 +81,7 @@ void Application::FindPhoto() {
 		pPtr->DisplayOnScreen();
 }
 
+// 이벤트로 사진 검색
 void Application::FindPhotoByEvent() {
 	using namespace std;
 
@@ -99,6 +104,7 @@ void Application::FindPhotoByEvent() {
 		cout << "\n%%%% 일치하는 사진을 찾지 못했습니다 %%%%\n";
 }
 
+// 등록되어있는 사진 목록을 화면에 출력
 void Application::DisplayList() {
 	using namespace std;
 
@@ -113,6 +119,7 @@ void Application::DisplayList() {
 	}
 }
 
+// 실행 메뉴 선택
 int Application::GetCommand() {
 	using namespace std;
 
@@ -147,6 +154,7 @@ int Application::GetCommand() {
 	}
 }
 
+// 외부파일로부터 데이터를 읽어옴
 bool Application::ReadAllFromFile() {
 	using namespace std;
 
@@ -154,6 +162,7 @@ bool Application::ReadAllFromFile() {
 	master.MakeEmpty();
 	ifstream inFile;
 	inFile.open(inFileName);
+	// 외부파일 읽기 실패시
 	if (!inFile.is_open()) {
 		cout << "Unable to Open input file" << endl;
 		return false;
@@ -165,11 +174,13 @@ bool Application::ReadAllFromFile() {
 	return true;
 }
 
+// 외부파일에 데이터를 씀
 bool Application::WriteAllToFile() {
 	using namespace std;
 
 	ofstream outFile;
 	outFile.open(outFileName);
+	// 외부파일 읽기 실패시
 	if (!outFile.is_open()) {
 		cout << "Unable to Open output file" << endl;
 		return false;
@@ -182,25 +193,28 @@ bool Application::WriteAllToFile() {
 	return true;
 }
 
+// 사진파일을 master list에 추가
 bool Application::AddPhotoToList(PhotoType& item) {
-	if (!master.GetLength())
+	// master list에 사진 중복 추가 방지
+	if (!master.GetLength()) // 사진이 없다면
 		master.PutItem(item);
 	else {
-		int found = master.Retrieve(item);
+		int found = master.Retrieve(item); // 중복 체크
 		if (found == -1)
 			master.PutItem(item);
 		else
 			return false;
 	}
 
-	if (!eventList.GetLength()) {
+	// event list에 사진 중복 추가 방지
+	if (!eventList.GetLength()) { // 사진이 없다면
 		EventType record(item.GetEventName());
 		record.AddPhotoKey(item.GetPhotoName());
 		eventList.PutItem(record);
 	}
 	else {
 		EventType record(item.GetEventName()), *ptr;
-		ptr = eventList.RetrievePtr(record);
+		ptr = eventList.RetrievePtr(record); // 중복 체크
 		if (!ptr) {
 			record.AddPhotoKey(item.GetPhotoName());
 			eventList.PutItem(record);
@@ -211,6 +225,7 @@ bool Application::AddPhotoToList(PhotoType& item) {
 	return true;
 }
 
+// 이벤트 리스트를 이용하여 사진 출력
 void Application::DisplayListUsingEL() {
 	std::string name;
 	std::cout << "\t 찾고자 하는 이벤트 명 입력 --> ";
@@ -224,6 +239,7 @@ void Application::DisplayListUsingEL() {
 		std::cout << "\n%%%% 일치하는 사진을 찾지 못했습니다 %%%%\n";
 }
 
+// 사진 이름과 이벤트로 사진 검색
 void Application::SearchByPhotoNameNEvent() {
 	std::string pName, eName;
 	std::cout << "\t << 이벤트와 사진명로 사진 검색  >>\n \t검색할 사진의 이벤트와 사진명을 입력하세요 --> ";
@@ -243,6 +259,7 @@ void Application::SearchByPhotoNameNEvent() {
 		std::cout << "\n%%%% 일치하는 사진을 찾지 못했습니다 %%%%\n";
 }
 
+// 사진 이벤트와 내용으로 사진 검색
 void Application::SearchByEventNContents() {
 	std::string eName, contents;
 	std::cout << "\t << 이벤트와 내용관련 단어로 사진 검색  >>\n \t검색할 사진의 이벤트와 내용 단어를 입력하세요 --> ";
